@@ -37,6 +37,12 @@ function Home({navigation}){
                 <TouchableOpacity style={styles.buttonTrack} onPress={() => {navigation.navigate('Follow')}}>
                     <Text style={styles.buttonTextTrack}>Following</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonTrack} onPress={() => {navigation.navigate('Save')}}>
+                    <Text style={styles.buttonTextTrack}>Save Following</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonTrack} onPress={() => {navigation.navigate('ShowSave')}}>
+                    <Text style={styles.buttonTextTrack}>Show follow save</Text>
+                </TouchableOpacity>
             </View>
         </View>
     ) 

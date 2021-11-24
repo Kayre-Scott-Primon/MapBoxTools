@@ -7,6 +7,8 @@ import Home from "./screens/home";
 import Track from "./screens/track";
 import MarkPoint from "./screens/markPoint";
 import Follow from "./screens/follow";
+import Save from "./screens/save";
+import ShowSave from "./screens/showSave";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +19,8 @@ const App = () => (
             <Stack.Screen name="Track" component={Track} />
             <Stack.Screen name="MarkPoint" component={MarkPoint}/>
             <Stack.Screen name="Follow" component={Follow}/>
+            <Stack.Screen name="Save" component={Save}/>
+            <Stack.Screen name="ShowSave" component={ShowSave}/>
         </Stack.Navigator>
     </NavigationContainer>
 )
