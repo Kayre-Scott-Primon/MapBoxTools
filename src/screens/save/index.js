@@ -139,9 +139,24 @@ function Save(){
                 `Success save and clean local features`,
             ToastAndroid.LONG,
         )
+        realm.close()
         }catch(e){
             console.log(e)
         }
+    }
+
+    async function cleanRealm(){
+        const realm = await Realm.open({
+            path: "route",
+            schema: [schema],
+        });
+        realm.write(() => {
+            realm.deleteAll()
+        })
+        ToastAndroid.show(
+            `Success delete all data Realm `,
+        ToastAndroid.LONG,
+        )
     }
 
     return(
@@ -179,13 +194,18 @@ function Save(){
                 :
                 false
             }
-            <TouchableOpacity style={styles.iconShow} onPress={() => setShow(!show)}>
-                {!show ?
-                    <Icon name='minimize' type='feather' color='#0f0' size={40} />
-                    :
-                    <Icon name='maximize' type='feather' color='#0f0' size={40} />
-                }
-            </TouchableOpacity>
+            <View style={styles.containerBottom}>
+                <TouchableOpacity style={styles.iconShow} onPress={() => setShow(!show)}>
+                    {!show ?
+                        <Icon name='minimize' type='feather' color='#0f0' size={40} />
+                        :
+                        <Icon name='maximize' type='feather' color='#0f0' size={40} />
+                    }
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.bottomDelete} onPress={() => {cleanRealm()}}>
+                    <Icon name='trash' type='feather' color='#0f0' size={40} />
+                </TouchableOpacity>
+            </View>
         </View>
     ) 
 }

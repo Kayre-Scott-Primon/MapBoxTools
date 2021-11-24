@@ -34,13 +34,17 @@ export default StyleSheet.create({
     },
     iconShow: {
         position: 'absolute',
-        alignSelf: 'flex-end',
-        right: 10,
+        alignSelf: 'center',
         bottom: 10,
         backgroundColor: 'rgba(800,800,800,0.2)',
         borderRadius: 7
     },
     textShow: {
         color: '#fff'
+    },
+    foot: {
+        position: 'absolute',
+        alignSelf: 'center',
+        bottom: 100
     }
 })

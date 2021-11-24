@@ -33,14 +33,26 @@ export default StyleSheet.create({
         left: 10
     },
     iconShow: {
-        position: 'absolute',
-        alignSelf: 'flex-end',
-        right: 10,
+        alignItems: 'center',
         bottom: 10,
         backgroundColor: 'rgba(800,800,800,0.2)',
-        borderRadius: 7
+        borderRadius: 7,
+        marginRight: 10
     },
     textShow: {
         color: '#fff'
+    },
+    bottomDelete: {
+        alignItems: 'center',
+        bottom: 10,
+        backgroundColor: 'rgba(800,800,800,0.2)',
+        borderRadius: 7,
+        marginLeft: 10
+    },
+    containerBottom: {
+        position: 'absolute',
+        alignSelf: 'center',
+        flexDirection: 'row',
+        bottom: 10
     }
 })
