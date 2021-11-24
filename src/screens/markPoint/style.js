@@ -37,4 +37,18 @@ export default StyleSheet.create({
         fontWeight: '400',
         fontSize: 18
     },
+    textMoment: {
+        color: '#fff',
+        fontWeight: '600',
+        fontSize: 17
+    },
+    containerMoment: {
+        backgroundColor: 'rgba(200,200,200,0.4)',
+        padding: 8,
+        borderRadius: 8,
+        borderWidth: 2,
+        borderColor: '#333',
+        width: 200,
+        alignItems: 'center',
+    }
 })

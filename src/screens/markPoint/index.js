@@ -18,7 +18,12 @@ function MarkPoint(){
     var [ map, setMap ] = useState()
     const [ userLocation, setUserLocation ] = useState([])
     const [ listPoints, setListPoints ] = useState([])
-    const [ points, setPoints ] = useState([])
+    const [ showMoment, setShowMoment ] = useState(false)
+    const [ point, setPoint ] = useState({coordinates: [0,0], moment: ''})
+
+    useEffect(() => {
+        console.log(showMoment)
+    },[showMoment])
 
     function addPoint(){
         let point = {
@@ -31,13 +36,20 @@ function MarkPoint(){
         console.log(point)
     }
 
+    function action(e) {
+        setShowMoment(!showMoment)
+        setPoint({coordinates: e.coordinates, moment: e.moment})
+    }
+
     function renderPoints() {
         let list = []
         listPoints.forEach((e) => {
             list.push(
-                <MapboxGL.PointAnnotation coordinate={e.coordinates} id={e.id + ''} key={e.id + '0'} title={e.moment}>
-                    <Icon name='location' type='evilicon' color='#00AF2A' size={50} />
-                </MapboxGL.PointAnnotation>
+                <MapboxGL.MarkerView coordinate={e.coordinates} id={e.id + ''} key={e.id + '0'} title={e.moment}>
+                    <TouchableOpacity onPress={() => {action(e)}} style={{padding: 50}}>
+                            <Icon name='location' type='evilicon' color='#00AF2A' size={50} />
+                    </TouchableOpacity>
+                </MapboxGL.MarkerView>
             )
         })
         return(list)
@@ -63,9 +75,19 @@ function MarkPoint(){
                     onUpdate={location => setUserLocation([location.coords.longitude, location.coords.latitude])}
                 />
                 {renderPoints()}
+                {showMoment ?
+                    <MapboxGL.MarkerView coordinate={point.coordinates} anchor={{x: 0.5, y: 1.5}}>
+                        <View style={styles.containerMoment}>
+                            <Text style={styles.textMoment}>
+                                {point.moment}
+                            </Text>
+                        </View>
+                    </MapboxGL.MarkerView>
+                    : false
+                }
             </MapboxGL.MapView>
             <View style={styles.head}>
-                <Text style={styles.textInfo}>Track</Text>
+                <Text style={styles.textInfo}>Mark some point</Text>
                 <Text style={styles.textInfo}>User: {userLocation[0]}  {userLocation[1]}</Text>
             </View>
             <View style={styles.footer}>
