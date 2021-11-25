@@ -6,15 +6,14 @@ import {
     TouchableOpacity,
     ScrollView,
     ToastAndroid,
+    BackHandler
 } from 'react-native'
 import MapboxGL from '@react-native-mapbox-gl/maps';
-import turf from 'turf'
 import moment from "moment";
 import { Icon } from "react-native-elements";
 import Realm from "realm";
 
-
-function Save(){
+function SaveTime({navigation}){
 
     MapboxGL.setAccessToken('pk.eyJ1Ijoia3Njb3R0cCIsImEiOiJja2E1ZnF5dWEwaWthM2Vxdjl4anZvMnJwIn0.cfEK3ZTP-_T8CuXi19jRQQ');
 
@@ -33,6 +32,7 @@ function Save(){
         }
     })
     const [ show, setShow ] = useState(false)
+    var interval
 
     // schema realm
     const schema = {
@@ -48,8 +48,28 @@ function Save(){
     },[])
 
     useEffect(() => {
+        interval = setInterval(() => {
+            save()
+        }, 12000)
+    },[])
+
+    useEffect(() => {
         saveRoute()
     },[userLocation])
+
+    useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', () => {
+            backButtonClick()
+            return true
+        }) 
+        return () =>
+        BackHandler.removeEventListener("hardwareBackPress", () => {});
+   },[])
+
+   function backButtonClick() {
+        clearImmediate(interval)
+        navigation.goBack()
+   }
 
     function saveRoute() {
         if(oldUserLocation[0] != userLocation[0] || oldUserLocation[1] != userLocation[1]){
@@ -68,12 +88,6 @@ function Save(){
             line.geometry.coordinates.push(userLocation)
             setLine(line)
             setOldUserLocation(userLocation)
-            track.features.length > 20 
-            ?   save() 
-            :   ToastAndroid.show(
-                    `Features acumulation: ${track.features.length}`,
-                ToastAndroid.SHORT,
-                )
         }
     }
 
@@ -138,9 +152,9 @@ function Save(){
             console.log('Salvo com sucesso')
             ToastAndroid.show(
                 `Success save and clean local features`,
-            ToastAndroid.SHORT,
-        )
-        realm.close()
+            ToastAndroid.LONG,
+            )
+            realm.close()
         }catch(e){
             console.log(e)
         }
@@ -156,7 +170,7 @@ function Save(){
         })
         ToastAndroid.show(
             `Success delete all data Realm `,
-        ToastAndroid.SHORT,
+        ToastAndroid.LONG,
         )
     }
 
@@ -184,7 +198,7 @@ function Save(){
                 
             </MapboxGL.MapView>
             <View style={styles.head}>
-                <Text style={styles.textInfo}>Save automatically route user, save realm every 20 points and clean local features</Text>
+                <Text style={styles.textInfo}>Save automatically route user, save realm every 2 minutes and clean local features</Text>
             </View>
             {show ?
                 <ScrollView style={styles.containerShow}>
@@ -211,4 +225,4 @@ function Save(){
     ) 
 }
 
-export  default Save
+export  default SaveTime

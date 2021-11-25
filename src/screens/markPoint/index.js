@@ -47,7 +47,7 @@ function MarkPoint(){
             list.push(
                 <MapboxGL.MarkerView coordinate={e.coordinates} id={e.id + ''} key={e.id + '0'} title={e.moment}>
                     <TouchableOpacity onPress={() => {action(e)}} style={{padding: 50}}>
-                            <Icon name='location' type='evilicon' color='#00AF2A' size={50} />
+                        <Icon name='location' type='evilicon' color='#00AF2A' size={50}/>
                     </TouchableOpacity>
                 </MapboxGL.MarkerView>
             )

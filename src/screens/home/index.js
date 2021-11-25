@@ -37,11 +37,14 @@ function Home({navigation}){
                 <TouchableOpacity style={styles.buttonTrack} onPress={() => {navigation.navigate('Follow')}}>
                     <Text style={styles.buttonTextTrack}>Following</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonTrack} onPress={() => {navigation.navigate('Save')}}>
-                    <Text style={styles.buttonTextTrack}>Save Following</Text>
+                <TouchableOpacity style={styles.buttonTrack} onPress={() => {navigation.navigate('SavePoints')}}>
+                    <Text style={styles.buttonTextTrack}>Following and save for points</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonTrack} onPress={() => {navigation.navigate('SaveTime')}}>
+                    <Text style={styles.buttonTextTrack}>Following and save for time</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonTrack} onPress={() => {navigation.navigate('ShowSave')}}>
-                    <Text style={styles.buttonTextTrack}>Show follow save</Text>
+                    <Text style={styles.buttonTextTrack}>Show follow save for points</Text>
                 </TouchableOpacity>
             </View>
         </View>

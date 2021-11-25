@@ -20,6 +20,7 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.9.0",
     "react-native-vector-icons": "^9.0.0",
+    "react-router": "^6.0.2",
     "realm": "^10.10.1",
     "turf": "^3.0.14"
   },
