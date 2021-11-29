@@ -64,12 +64,12 @@ function SaveTime({navigation}){
         }) 
         return () =>
         BackHandler.removeEventListener("hardwareBackPress", () => {});
-   },[])
+    },[])
 
-   function backButtonClick() {
+    function backButtonClick() {
         clearImmediate(interval)
         navigation.goBack()
-   }
+    }
 
     function saveRoute() {
         if(oldUserLocation[0] != userLocation[0] || oldUserLocation[1] != userLocation[1]){

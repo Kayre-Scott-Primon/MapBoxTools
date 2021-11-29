@@ -5,14 +5,15 @@ export default StyleSheet.create({
         height: '100%',
         backgroundColor: '#4f9',
         justifyContent: 'space-between',
-        paddingVertical: 10
+        paddingVertical: 10,
     },
     textInfo: {
         fontSize: 21,
         fontWeight: '600',
         color: '#00f',
         margin: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        marginBottom: 50
     },
     buttonTrack: {
         borderWidth: 2,

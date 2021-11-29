@@ -3,6 +3,7 @@ import styles from './style'
 import {
     View,
     Text,
+    Share,
     TouchableOpacity,
     ScrollView,
     ToastAndroid,
@@ -12,6 +13,8 @@ import turf, { center } from 'turf'
 import moment from "moment";
 import { Icon } from "react-native-elements";
 import Realm from "realm";
+const tokml = require('tokml')
+
 
 
 function ShowSave(){
@@ -37,6 +40,7 @@ function ShowSave(){
         sw: [0.0,0.0]
     })
     const [ empty, setempty ] = useState(false)
+    const [ share, setShare ] = useState(false)
 
     // schema realm
     const schema = {
@@ -79,6 +83,33 @@ function ShowSave(){
         }
     }
 
+    async function exportKML() {
+        var kml = tokml(track);
+        try {
+            const result = await Share.share({
+                message:
+                    'Exporting your route data by format .KML',
+                url: 'diretorio do caminho do arquivo'
+            });
+            if (result.action === Share.sharedAction) {
+              if (result.activityType) {
+                // shared with activity type of result.activityType
+              } else {
+                // shared
+              }
+            } else if (result.action === Share.dismissedAction) {
+              // dismissed
+            }
+        } catch (error) {
+        alert(error.message);
+        }
+    }
+
+    function buttonShare() {
+        setShare(false)
+        exportKML()
+    }
+
     return(
         <View style={styles.container}>
             <MapboxGL.MapView
@@ -114,13 +145,32 @@ function ShowSave(){
                 :
                 false
             }
-            <TouchableOpacity style={styles.iconShow} onPress={() => setShow(!show)}>
-                {!show ?
-                    <Icon name='minimize' type='feather' color='#0f0' size={40} />
-                    :
-                    <Icon name='maximize' type='feather' color='#0f0' size={40} />
-                }
-            </TouchableOpacity>
+            {share ?
+                <View style={styles.containerShow}>
+                    <Text style={[styles.textShare, {alignSelf: 'center'}]}>
+                        Do you really want to export .kml ?
+                    </Text>
+                    <TouchableOpacity style={styles.buttonShowShare} onPress={buttonShare}>
+                        <Text style={styles.textShowShare}>
+                            Yes, i want!
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                :
+                false
+            }
+            <View style={styles.conteinerButtons}>
+                <TouchableOpacity style={styles.iconShow} onPress={() => setShow(!show)}>
+                    {!show ?
+                        <Icon name='minimize' type='feather' color='#0f0' size={40} />
+                        :
+                        <Icon name='maximize' type='feather' color='#0f0' size={40} />
+                    }
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.iconShow} onPress={() => setShare(!share)}>
+                        <Icon name='share' type='feather' color='#0f0' size={40} />
+                </TouchableOpacity>
+            </View>
             { empty ?
                 <View style={styles.foot}>
                     <Text style={styles.textInfo}>make tracking in the page save Following</Text>

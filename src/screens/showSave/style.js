@@ -33,11 +33,15 @@ export default StyleSheet.create({
         left: 10
     },
     iconShow: {
-        position: 'absolute',
-        alignSelf: 'center',
-        bottom: 10,
+        marginHorizontal: 10,
         backgroundColor: 'rgba(800,800,800,0.2)',
         borderRadius: 7
+    },
+    conteinerButtons: {
+        position: 'absolute',
+        alignSelf: 'center',
+        flexDirection: 'row',
+        bottom: 10
     },
     textShow: {
         color: '#fff'
@@ -46,5 +50,22 @@ export default StyleSheet.create({
         position: 'absolute',
         alignSelf: 'center',
         bottom: 100
+    },
+    textShare: {
+        color: '#fff',
+        fontSize: 20
+    },
+    textShowShare: {
+        color: '#3f4',
+        fontSize: 18,
+        fontWeight: '700'
+    },
+    buttonShowShare: {
+        alignSelf: 'center',
+        alignItems: 'center',
+        padding: 10,
+        backgroundColor: 'rgba(68, 85, 102,0.75)',
+        borderRadius: 8,
+        marginTop: 10,
     }
 })
