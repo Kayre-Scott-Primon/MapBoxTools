@@ -174,14 +174,14 @@ function ShowSave(){
                 false
             }
             <View style={styles.conteinerButtons}>
-                <TouchableOpacity style={styles.iconShow} onPress={() => setShow(!show)}>
+                <TouchableOpacity style={styles.iconShow} onPress={() => {setShow(!show), setShare(false)}}>
                     {!show ?
                         <Icon name='minimize' type='feather' color='#0f0' size={40} />
                         :
                         <Icon name='maximize' type='feather' color='#0f0' size={40} />
                     }
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.iconShow} onPress={() => setShare(!share)}>
+                <TouchableOpacity style={styles.iconShow} onPress={() => {setShare(!share), setShow(false)}}>
                         <Icon name='share' type='feather' color='#0f0' size={40} />
                 </TouchableOpacity>
             </View>
