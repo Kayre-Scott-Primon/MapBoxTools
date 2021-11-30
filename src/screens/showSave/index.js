@@ -3,7 +3,7 @@ import styles from './style'
 import {
     View,
     Text,
-    Share,
+    //Share,
     TouchableOpacity,
     ScrollView,
     ToastAndroid,
@@ -14,6 +14,8 @@ import moment from "moment";
 import { Icon } from "react-native-elements";
 import Realm from "realm";
 const tokml = require('tokml')
+var RNFS = require('react-native-fs');
+import Share from 'react-native-share';
 
 
 
@@ -85,23 +87,35 @@ function ShowSave(){
 
     async function exportKML() {
         var kml = tokml(track);
+        console.log(kml)
+        var path = RNFS.DownloadDirectoryPath + '/track.kml';
+
+        // write the file
+        await RNFS.writeFile(path, kml, 'utf8')
+        .then((success) => {
+            console.log('FILE WRITTEN!', path);
+        })
+        .catch((err) => {
+            console.log(err.message);
+        });
+
+        // share
         try {
-            const result = await Share.share({
-                message:
-                    'Exporting your route data by format .KML',
-                url: 'diretorio do caminho do arquivo'
-            });
-            if (result.action === Share.sharedAction) {
-              if (result.activityType) {
-                // shared with activity type of result.activityType
-              } else {
-                // shared
-              }
-            } else if (result.action === Share.dismissedAction) {
-              // dismissed
+            var options = {
+                url: 'file://' + RNFS.DownloadDirectoryPath + '/track.kml',
+                title: "Track AppMapBox",
+                subject: "KML file",
+                message: 'Exporting your route data by format .kml',
             }
+            await Share.open(options)
+                .then((res) => {
+                    console.log('res ' + res);
+                })
+                .catch((err) => {
+                    err && console.log(err);
+                });
         } catch (error) {
-        alert(error.message);
+            alert(error.message);
         }
     }
 

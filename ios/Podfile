@@ -12,6 +12,10 @@ target 'AppMapBox' do
     :hermes_enabled => false
   )
 
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
+  pod 'RNShare', :path => '../node_modules/react-native-share'
+
   target 'AppMapBoxTests' do
     inherit! :complete
     # Pods for testing
