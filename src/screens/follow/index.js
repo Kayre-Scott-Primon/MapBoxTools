@@ -10,10 +10,11 @@ import MapboxGL from '@react-native-mapbox-gl/maps';
 import turf from 'turf'
 import moment from "moment";
 import { Icon } from "react-native-elements";
+import { tokenMapBox } from "../../token";
 
 function Follow(){
 
-    MapboxGL.setAccessToken('pk.eyJ1Ijoia3Njb3R0cCIsImEiOiJja2E1ZnF5dWEwaWthM2Vxdjl4anZvMnJwIn0.cfEK3ZTP-_T8CuXi19jRQQ');
+    MapboxGL.setAccessToken(tokenMapBox);
 
     var [ map, setMap ] = useState()
     const [ userLocation, setUserLocation ] = useState([0,0])

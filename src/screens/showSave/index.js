@@ -16,12 +16,13 @@ import Realm from "realm";
 const tokml = require('tokml')
 var RNFS = require('react-native-fs');
 import Share from 'react-native-share';
+import { tokenMapBox } from "../../token";
 
 
 
 function ShowSave(){
 
-    MapboxGL.setAccessToken('pk.eyJ1Ijoia3Njb3R0cCIsImEiOiJja2E1ZnF5dWEwaWthM2Vxdjl4anZvMnJwIn0.cfEK3ZTP-_T8CuXi19jRQQ');
+    MapboxGL.setAccessToken(tokenMapBox);
 
     var [ map, setMap ] = useState()
     const [ userLocation, setUserLocation ] = useState([0,0])
