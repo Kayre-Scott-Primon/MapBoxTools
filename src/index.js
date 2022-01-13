@@ -12,6 +12,7 @@ import Save from "./screens/save";
 import ShowSave from "./screens/showSave";
 import SaveTime from "./screens/saveTime";
 import Splash from "./screens/splash";
+import Layers from "./screens/layers";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ const App = () => (
             <Stack.Screen name="SavePoints" component={Save}/>
             <Stack.Screen name="ShowSave" component={ShowSave}/>
             <Stack.Screen name="SaveTime" component={SaveTime}/>
+            <Stack.Screen name="Layers" component={Layers}/>
         </Stack.Navigator>
     </NavigationContainer>
 )

@@ -13,7 +13,7 @@ export default StyleSheet.create({
         color: '#00f',
         margin: 20,
         textAlign: 'center',
-        marginBottom: 50
+        marginBottom: 30
     },
     buttonTrack: {
         borderWidth: 2,
