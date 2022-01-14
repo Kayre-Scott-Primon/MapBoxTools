@@ -16,6 +16,8 @@ target 'AppMapBox' do
 
   pod 'RNShare', :path => '../node_modules/react-native-share'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'AppMapBoxTests' do
     inherit! :complete
     # Pods for testing
