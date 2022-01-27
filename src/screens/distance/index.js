@@ -19,7 +19,8 @@ const Line = ({line}) => (
             id={Math.random() + ''}
             style={{
                 lineColor: '#f00',
-                lineWidth: 2
+                lineWidth: 2,
+                lineDasharray: [1, 1]
             }}
         />
     </MapboxGL.ShapeSource>
@@ -142,7 +143,7 @@ function Distance(){
                 </MapboxGL.ShapeSource>
                 <Line  line={line}/>
                 <MapboxGL.PointAnnotation coordinate={locText}>
-                    <Text style={{color: '#fff', fontSize: 20}}>{distance}m</Text>
+                    <Text style={{color: '#fff', fontSize: 20, backgroundColor: 'rgba(255,255,255,0.25sd)', borderRadius: 10}}>{distance}m</Text>
                 </MapboxGL.PointAnnotation>
             </MapboxGL.MapView>
             <View style={styles.head}>
