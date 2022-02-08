@@ -14,6 +14,7 @@ import SaveTime from "./screens/saveTime";
 import Splash from "./screens/splash";
 import Layers from "./screens/layers";
 import Distance from "./screens/distance";
+import Background from "./screens/background";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ const App = () => (
             <Stack.Screen name="SaveTime" component={SaveTime}/>
             <Stack.Screen name="Layers" component={Layers}/>
             <Stack.Screen name="Distance" component={Distance}/>
+            <Stack.Screen name="Background" component={Background}/>
         </Stack.Navigator>
     </NavigationContainer>
 )
