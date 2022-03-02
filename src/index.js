@@ -15,6 +15,7 @@ import Splash from "./screens/splash";
 import Layers from "./screens/layers";
 import Distance from "./screens/distance";
 import Background from "./screens/background";
+import ShapeLayer from "./screens/Shapes&Layers";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ const App = () => (
             <Stack.Screen name="Layers" component={Layers}/>
             <Stack.Screen name="Distance" component={Distance}/>
             <Stack.Screen name="Background" component={Background}/>
+            <Stack.Screen name="ShapeLayer" component={ShapeLayer}/>
         </Stack.Navigator>
     </NavigationContainer>
 )
