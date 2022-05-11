@@ -6,7 +6,8 @@ import {
     ScrollView,
     BackHandler,
     TouchableOpacity,
-    PermissionsAndroid
+    PermissionsAndroid,
+    StatusBar
 } from 'react-native'
 
 function Home({navigation}){
@@ -41,6 +42,7 @@ function Home({navigation}){
 
     return(
         <View style={styles.container}>
+            <StatusBar barStyle="dark-content" backgroundColor={'#fff'}/>
             <ScrollView>
                 <Text style={styles.textInfo}>Aplicativo voltado para testes com MapBox no ReactNative a fim de se explorar os recursos disponiveis e analizar qual a melhor opção e melhor configurações para alguns usos</Text>
                 <View style={styles.containerButtons}>
@@ -73,6 +75,9 @@ function Home({navigation}){
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonTrack} onPress={() => {navigation.navigate('ShapeLayer')}}>
                         <Text style={styles.buttonTextTrack}>Shapes and Layers</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonTrack} onPress={() => {navigation.navigate('FollowUser')}}>
+                        <Text style={styles.buttonTextTrack}>Follow user</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
