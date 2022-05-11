@@ -12,11 +12,12 @@ const FollowUser = () => {
     var [ map, setMap ] = useState()
     const [ userLocation, setUserLocation ] = useState([0,0])
     const [ follow, setFollow ] = useState(true)
-    const [ pitch, setPitch ] = useState(60)
+    const [ pitch, setPitch ] = useState(80)
     const [ icon, setIcon ] = useState('text')
 
     function changeMode() {
         setFollow(!follow)
+        //setPitch(80)
         follow ? setPitch(80) : setPitch(0)
     }
 
@@ -24,6 +25,11 @@ const FollowUser = () => {
         icon == 'text' ? setIcon('icon') : setIcon('text')
         setFollow(follow)
     }
+
+    useEffect(() => {
+        //setFollow(false)
+        setTimeout(() => setFollow(false),1000)
+    },[])
 
   return (
     <View style={styles.containerMain}>
@@ -33,16 +39,26 @@ const FollowUser = () => {
             style={styles.containerMap}
             compassViewPosition={3}
             styleURL={MapboxGL.StyleURL.TrafficNight}
-            onDidFinishRenderingMapFully={(r) => {
-                setFollow(follow)
+            onTouchEnd={() => {
+                if(follow){
+                    setFollow(false)
+                    setTimeout(() => setFollow(true),1000)
+                }else{
+                    setFollow(true)
+                    setFollow(false)
+                }
+                //setFollow(follow)
                 setPitch(pitch)
+                console.log('02')
             }}
             zoomEnabled={true}
+            pitchEnabled={true}
         >
             <MapboxGL.Camera
                 followUserLocation={follow}
                 followUserMode={MapboxGL.UserTrackingModes.FollowWithHeading}
                 followPitch={pitch}
+                //pitch={80}
             />
             <MapboxGL.UserLocation
                 renderMode={'normal'}
@@ -83,7 +99,7 @@ const FollowUser = () => {
             </TouchableOpacity>
             <TouchableOpacity 
                 style={[styles.button, icon == 'text' 
-                    ? {backgroundColor: 'rgba(25,15,250,0.5)'} 
+                    ? {backgroundColor: 'rgba(15,15,250,0.5)'} 
                     : {backgroundColor: 'rgba(255,255,0,0.5)'}
                     ]} 
                 onPress={() => changeIcon()}>
