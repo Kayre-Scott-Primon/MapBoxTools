@@ -1,9 +1,11 @@
 import { View, Text, StatusBar, TouchableOpacity } from 'react-native'
+import MapboxGL from '@react-native-mapbox-gl/maps'
 import React, {useState, useEffect} from 'react'
+import { tokenMapBox } from "../../token"
+import iconImage from './arrow.png'
+import { shape } from './data'
 import styles from './style'
-import MapboxGL from '@react-native-mapbox-gl/maps';
-import { tokenMapBox } from "../../token";
-import iconImage from './arrow.png';
+import turf from 'turf'
 
 MapboxGL.setAccessToken(tokenMapBox);
 
@@ -13,12 +15,39 @@ const FollowUser = () => {
     const [ userLocation, setUserLocation ] = useState([0,0])
     const [ follow, setFollow ] = useState(true)
     const [ pitch, setPitch ] = useState(80)
+    var [ cameraMap, setCameraMap ] = useState()
     const [ icon, setIcon ] = useState('text')
+    const [ zoom, setZoom ] = useState(14)
+    const [ bounds, setBounds ] = useState({
+        ne: [0,0],
+        sw: [0,0],
+        padding: 2
+    })
 
-    function changeMode() {
+    async function changeMode() {
+        console.log('zoom', await map.getZoom())
+        setZoom(await map.getZoom())
         setFollow(!follow)
         //setPitch(80)
-        follow ? setPitch(80) : setPitch(0)
+        if(follow){
+            setPitch(80)
+            setTimeout(() => centerLayer(),2000)
+        }else{
+            setBounds(undefined)
+            setPitch(0)
+        }
+    }
+
+    function centerLayer(){
+        console.log('centerLayer')
+        let edges = turf.bbox(shape)
+        setBounds({
+            ne: [edges[0],edges[1]],
+            sw: [edges[2],edges[3]],
+            padding: 2
+        })
+        cameraMap
+        //cameraMap.fitBounds(bounds.ne, bounds.sw, 5, 1000)
     }
 
     function changeIcon(){
@@ -27,9 +56,8 @@ const FollowUser = () => {
     }
 
     useEffect(() => {
-        //setFollow(false)
-        setTimeout(() => setFollow(false),1000)
-    },[])
+        console.log('follow:', follow, 'bounds:', bounds)
+    },[follow])
 
   return (
     <View style={styles.containerMain}>
@@ -47,22 +75,24 @@ const FollowUser = () => {
                     setFollow(true)
                     setFollow(false)
                 }
-                //setFollow(follow)
                 setPitch(pitch)
                 console.log('02')
             }}
-            zoomEnabled={true}
+            //zoomEnabled={false}
             pitchEnabled={true}
+            rotateEnabled={!follow}
         >
             <MapboxGL.Camera
+                bounds={bounds}
+                ref={m => {cameraMap = m, setCameraMap(cameraMap)}}
                 followUserLocation={follow}
                 followUserMode={MapboxGL.UserTrackingModes.FollowWithHeading}
                 followPitch={pitch}
-                //pitch={80}
+                heading={90}
             />
             <MapboxGL.UserLocation
                 renderMode={'normal'}
-                showsUserHeadingIndicator={false}
+                showsUserHeadingIndicator={true}
                 androidRenderMode={'compass'}
                 onUpdate={location => setUserLocation([location.coords.longitude, location.coords.latitude])}
             >
@@ -81,6 +111,17 @@ const FollowUser = () => {
                     }}
                 />
             </MapboxGL.UserLocation>
+            {shape != {} ? 
+                <>
+                <MapboxGL.ShapeSource id='shape' shape={shape}>
+                    <MapboxGL.LineLayer id='layer-line' style={{
+                        lineColor: '#a08',
+                        lineWidth: 5
+                    }} />
+                </MapboxGL.ShapeSource>
+                </>
+                : false
+            }
         </MapboxGL.MapView>
         <View style={styles.containerTitle}>
             <Text style={styles.textInfo}>Follow user location</Text>
