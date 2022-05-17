@@ -1,4 +1,5 @@
 import { View, Text, StatusBar, TouchableOpacity } from 'react-native'
+import CompassHeading from 'react-native-compass-heading';
 import MapboxGL from '@react-native-mapbox-gl/maps'
 import React, {useState, useEffect} from 'react'
 import { tokenMapBox } from "../../token"
@@ -13,11 +14,13 @@ const FollowUser = () => {
 
     var [ map, setMap ] = useState()
     const [ userLocation, setUserLocation ] = useState([0,0])
+    const [ compassHeading, setCompassHeading ] = useState(0)
     const [ follow, setFollow ] = useState(true)
     const [ pitch, setPitch ] = useState(80)
     var [ cameraMap, setCameraMap ] = useState()
     const [ icon, setIcon ] = useState('text')
     const [ zoom, setZoom ] = useState(14)
+    const [ head, setHead ] = useState(0)
     const [ bounds, setBounds ] = useState({
         ne: [0,0],
         sw: [0,0],
@@ -31,6 +34,7 @@ const FollowUser = () => {
         //setPitch(80)
         if(follow){
             setPitch(80)
+            setHead(0)
             setTimeout(() => centerLayer(),2000)
         }else{
             setBounds(undefined)
@@ -46,7 +50,7 @@ const FollowUser = () => {
             sw: [edges[2],edges[3]],
             padding: 2
         })
-        cameraMap
+        //cameraMap
         //cameraMap.fitBounds(bounds.ne, bounds.sw, 5, 1000)
     }
 
@@ -54,6 +58,17 @@ const FollowUser = () => {
         icon == 'text' ? setIcon('icon') : setIcon('text')
         setFollow(follow)
     }
+
+    useEffect(() => {
+        const degree_update_rate = 3
+        CompassHeading.start(degree_update_rate, ({ heading, accuracy}) => {
+            setCompassHeading(heading)
+        })
+    
+        return () => {
+            CompassHeading.stop()
+        }
+    }, []);
 
     useEffect(() => {
         console.log('follow:', follow, 'bounds:', bounds)
@@ -80,7 +95,7 @@ const FollowUser = () => {
             }}
             //zoomEnabled={false}
             pitchEnabled={true}
-            rotateEnabled={!follow}
+            rotateEnabled={follow}
         >
             <MapboxGL.Camera
                 bounds={bounds}
@@ -88,7 +103,7 @@ const FollowUser = () => {
                 followUserLocation={follow}
                 followUserMode={MapboxGL.UserTrackingModes.FollowWithHeading}
                 followPitch={pitch}
-                heading={90}
+                heading={head}
             />
             <MapboxGL.UserLocation
                 renderMode={'normal'}
@@ -102,12 +117,11 @@ const FollowUser = () => {
                         textField: icon == 'text' ? '\n\nV' : '',
                         textColor: '#ff0',
                         textSize: 40,
-                        textRotate: 180,
+                        textRotate: follow ? 180 : 180 + compassHeading,
                         iconImage:  icon == 'icon' ? iconImage : '',
                         iconSize: 0.075,
                         textPitchAlignment: 'map',
-                        iconPitchAlignment: 'map',
-                        
+                        iconPitchAlignment: 'map',                        
                     }}
                 />
             </MapboxGL.UserLocation>

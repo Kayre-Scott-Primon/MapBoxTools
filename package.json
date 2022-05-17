@@ -19,6 +19,7 @@
     "react": "17.0.2",
     "react-native": "0.66.3",
     "react-native-android-location-enabler": "^1.2.2",
+    "react-native-compass-heading": "^1.4.0",
     "react-native-elements": "^3.4.2",
     "react-native-fs": "^2.18.0",
     "react-native-gesture-handler": "^2.1.1",
