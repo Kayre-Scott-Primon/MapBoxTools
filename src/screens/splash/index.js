@@ -6,6 +6,7 @@ import {
     Text,
     TouchableOpacity,
     ScrollView,
+    StatusBar,
 } from 'react-native'
 
 
@@ -19,6 +20,7 @@ function Splash({navigation}){
   
     return(
         <View style={styles.container}>
+        <StatusBar backgroundColor={'#03a'} barStyle={"light-content"}/>
             <Image source={require('../../assets/image/logo.png')} style={styles.logo}/>
             <Text style={styles.text}>
                 AppMapBox
