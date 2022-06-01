@@ -106,7 +106,8 @@ const FollowUserManual = () => {
         <MapboxGL.MapView
             ref={r => {map = r, setMap(map)} }
             style={styles.containerMap}
-            compassViewPosition={3}
+            compassViewPosition={0}
+            compassViewMargins={{x: 25, y: 750}}
             styleURL={MapboxGL.StyleURL.TrafficNight}
             onTouchEnd={() => {
                 if(follow){
