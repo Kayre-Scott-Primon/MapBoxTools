@@ -20,7 +20,6 @@ const FollowUserManual = () => {
     const [ pitch, setPitch ] = useState(80)
     var [ cameraMap, setCameraMap ] = useState()
     const [ icon, setIcon ] = useState('text')
-    const [ zoom, setZoom ] = useState(14)
     const [ head, setHead ] = useState(0)
     const [ boundFactor, setBoundFactor ] = useState(0.0001)
     const [ bounds, setBounds ] = useState({
@@ -30,13 +29,12 @@ const FollowUserManual = () => {
     })
 
     async function changeMode() {
-        setZoom(await map.getZoom())
         setFollow(!follow)
         if(follow){
             setHead(0)
-            setTimeout(() => centerLayer(),2000)
+            setTimeout(() => centerLayer(),1000)
         }else{
-            setTimeout(() => centerUser(),2000)
+            setTimeout(() => centerUser(),1000)
         }
     }
 
@@ -95,7 +93,7 @@ const FollowUserManual = () => {
 
     useEffect(() => {
         if(follow){
-            centerUser()
+            setTimeout(() => centerUser(),500)
             setHead(compassHeading)
         }
     },[userLocation])
@@ -107,11 +105,11 @@ const FollowUserManual = () => {
             ref={r => {map = r, setMap(map)} }
             style={styles.containerMap}
             compassViewPosition={0}
-            compassViewMargins={{x: 25, y: 750}}
+            compassViewMargins={{x: 15, y: 75}}
             styleURL={MapboxGL.StyleURL.TrafficNight}
             onTouchEnd={() => {
                 if(follow){
-                    centerUser()
+                    setTimeout(() => centerUser(),1000)
                 }else{
                 }
             }}
