@@ -18,6 +18,7 @@ import Background from "./screens/background";
 import ShapeLayer from "./screens/Shapes&Layers";
 import FollowUser from "./screens/followuser";
 import FollowUserManual from './screens/followUserManual'
+import FeatureState from "./screens/featureState";
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,7 @@ const App = () => (
             <Stack.Screen name="ShapeLayer" component={ShapeLayer}/>
             <Stack.Screen name="FollowUser" component={FollowUser}/>
             <Stack.Screen name="FollowUserManual" component={FollowUserManual}/>
+            <Stack.Screen name="FeatureState" component={FeatureState}/>
         </Stack.Navigator>
     </NavigationContainer>
 )
