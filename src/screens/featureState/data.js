@@ -13,8 +13,8 @@ export const dataGeo =
                 "type": "Feature",
                 "properties": {
                     "id": "1",
-                    "coletas": [
-                        "184a16ab-c709-464b-9eef-179e5210d519"
+                    "list": [
+                        "slug-1"
                     ]
                 },
                 "id": "1"
@@ -30,8 +30,8 @@ export const dataGeo =
                 "type": "Feature",
                 "properties": {
                     "id": "2",
-                    "coletas": [
-                        "0343fa9d-1e54-463b-aa95-001562ff838e"
+                    "list": [
+                        "slug-2"
                     ]
                 },
                 "id": "2"
@@ -47,8 +47,8 @@ export const dataGeo =
                 "type": "Feature",
                 "properties": {
                     "id": "3",
-                    "coletas": [
-                        "aefbbf44-40d2-4362-abbf-9cffc448f549"
+                    "list": [
+                        "slug-3"
                     ]
                 },
                 "id": "3"
@@ -64,8 +64,8 @@ export const dataGeo =
                 "type": "Feature",
                 "properties": {
                     "id": "4",
-                    "coletas": [
-                        "aa73805c-a943-40a9-9853-d0cbb8538f23"
+                    "list": [
+                        "slug-4"
                     ]
                 },
                 "id": "4"
@@ -81,8 +81,8 @@ export const dataGeo =
                 "type": "Feature",
                 "properties": {
                     "id": "5",
-                    "coletas": [
-                        "4af80fb0-e0a6-484c-b7ad-621a9a3db3b6"
+                    "list": [
+                        "slug-5"
                     ]
                 },
                 "id": "5"
@@ -98,8 +98,8 @@ export const dataGeo =
                 "type": "Feature",
                 "properties": {
                     "id": "6",
-                    "coletas": [
-                        "fc1eb76b-e973-4833-8156-7b30272847fb"
+                    "list": [
+                        "slug-6"
                     ]
                 },
                 "id": "6"
@@ -115,8 +115,8 @@ export const dataGeo =
                 "type": "Feature",
                 "properties": {
                     "id": "7",
-                    "coletas": [
-                        "c9c258ef-9986-456c-8abb-289e003d3f7e"
+                    "list": [
+                        "slug-7"
                     ]
                 },
                 "id": "7"
@@ -132,8 +132,8 @@ export const dataGeo =
                 "type": "Feature",
                 "properties": {
                     "id": "8",
-                    "coletas": [
-                        "3fd21fab-1ab5-4201-8fd7-9ed940600002"
+                    "list": [
+                        "slug-8"
                     ]
                 },
                 "id": "8"
@@ -149,9 +149,9 @@ export const dataGeo =
                 "type": "Feature",
                 "properties": {
                     "id": "9",
-                    "coletas": [
-                        "a4151617-6acb-47c2-8eca-a3e5f5d17d13",
-                        "a4151617-6acb-47c2-8eca-a3e5f5d17d14"
+                    "list": [
+                        "slug-91",
+                        "slug-92"
                     ]
                 },
                 "id": "9"
@@ -167,9 +167,9 @@ export const dataGeo =
                 "type": "Feature",
                 "properties": {
                     "id": "10",
-                    "coletas": [
-                        "a62a80c7-7e8e-40e2-9a88-750caf7db88f",
-                        "a62a80c7-7e8e-40e2-9a88-750caf7db88d"
+                    "list": [
+                        "slug-101",
+                        "slug-102"
                     ]
                 },
                 "id": "10"
@@ -181,52 +181,52 @@ export const dataBase = {
     "type": "FeatureCollection",
     "features": [
         {
-            "slug": "a62a80c7-7e8e-40e2-9a88-750caf7db88f",
-            "status": "pendente",
+            "slug": "slug-102",
+            "status": "finished",
         },
         {
-            "slug": "a62a80c7-7e8e-40e2-9a88-750caf7db88d",
-            "status": "finalizada",
+            "slug": "slug-101",
+            "status": "finished",
         },
         {
-            "slug": "a4151617-6acb-47c2-8eca-a3e5f5d17d13",
-            "status": "pendente",
+            "slug": "slug-92",
+            "status": "pending",
         },
         {
-            "slug": "a4151617-6acb-47c2-8eca-a3e5f5d17d14",
-            "status": "finalizada",
+            "slug": "slug-91",
+            "status": "finished",
         },
         {
-            "slug": "3fd21fab-1ab5-4201-8fd7-9ed940600002",
-            "status": "recusada",
+            "slug": "slug-8",
+            "status": "refused",
         },
         {
-            "slug": "c9c258ef-9986-456c-8abb-289e003d3f7e",
-            "status": "andamento",
+            "slug": "slug-7",
+            "status": "load",
         },
         {
-            "slug": "fc1eb76b-e973-4833-8156-7b30272847fb",
-            "status": "pendente",
+            "slug": "slug-6",
+            "status": "pending",
         },
         {
-            "slug": "4af80fb0-e0a6-484c-b7ad-621a9a3db3b6",
-            "status": "recusada",
+            "slug": "slug-5",
+            "status": "refused",
         },
         {
-            "slug": "aa73805c-a943-40a9-9853-d0cbb8538f23",
-            "status": "finalizada",
+            "slug": "slug-4",
+            "status": "finished",
         },
         {
-            "slug": "aefbbf44-40d2-4362-abbf-9cffc448f549",
-            "status": "pendente",
+            "slug": "slug-3",
+            "status": "pending",
         },
         {
-            "slug": "0343fa9d-1e54-463b-aa95-001562ff838e",
-            "status": "recusada",
+            "slug": "slug-2",
+            "status": "refused",
         },
         {
-            "slug": "184a16ab-c709-464b-9eef-179e5210d519",
-            "status": "finalizada",
+            "slug": "slug-1",
+            "status": "finished",
         }
     ]
 }

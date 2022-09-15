@@ -15,6 +15,9 @@ function FeatureState(){
 
     var [ map, setMap ] = useState()
     const [ userLocation, setUserLocation ] = useState([0,0])
+    const [ selectedLayer, setSelectLayer ] = useState({
+            properties: { id: '' }
+    })
 
     useEffect(() => {
         updateColors()
@@ -22,29 +25,29 @@ function FeatureState(){
 
     async function updateColors(){
         dataGeo.features.forEach((e, v) => {
-            if(e.properties.coletas.length > 1){
-                let counter = 0 // para contar se todas foram finalizadas
-                e.properties.coletas.forEach((i) => {
+            if(e.properties.list.length > 1){
+                let counter = 0 // para contar se todas foram finisheds
+                e.properties.list.forEach((i) => {
                     dataBase.features.forEach(a => {
                         if(a.slug == i){
                             switch(a.status){
-                                case 'finalizada':
+                                case 'finished':
                                     console.log('finalizou')
                                     counter = counter + 1
-                                    counter == e.properties.coletas.length 
+                                    counter == e.properties.list.length 
                                         ? dataGeo.features[v].properties.color = '#0f0'
                                         : dataGeo.features[v].properties.color = '#ff0'
                                     break
-                                case  'pendente':
-                                    console.log('pendente')
+                                case  'pending':
+                                    console.log('pending')
                                     dataGeo.features[v].properties.color = '#fff'
                                     break
-                                case 'recusada':
-                                    console.log('recusada')
+                                case 'refused':
+                                    console.log('refused')
                                     dataGeo.features[v].properties.color = '#f00'
                                     break
-                                case 'andamento':
-                                    console.log('andamento')
+                                case 'load':
+                                    console.log('load')
                                     dataGeo.features[v].properties.color = '#ff0'
                                     break
                             }
@@ -53,22 +56,22 @@ function FeatureState(){
                 })
             }else {
                 dataBase.features.forEach(a => {
-                    if(a.slug == e.properties.coletas[0]){
+                    if(a.slug == e.properties.list[0]){
                         switch(a.status){
-                            case 'finalizada':
+                            case 'finished':
                                 console.log('finalizou')
                                 dataGeo.features[v].properties.color = '#0f0'
                                 break
-                            case  'pendente':
-                                console.log('pendente')
+                            case  'pending':
+                                console.log('pending')
                                 dataGeo.features[v].properties.color = '#fff'
                                 break
-                            case 'recusada':
-                                console.log('recusada')
+                            case 'refused':
+                                console.log('refused')
                                 dataGeo.features[v].properties.color = '#f00'
                                 break
-                            case 'andamento':
-                                console.log('andamento')
+                            case 'load':
+                                console.log('load')
                                 dataGeo.features[v].properties.color = '#ff0'
                                 break
                         }
@@ -80,7 +83,15 @@ function FeatureState(){
 
     async function addState(e){
         console.log(e)
-        //dataGeo.features[i].properties.color = '#00f'
+        dataGeo.features.some((value, index) => {
+            if (value.properties.id == e.features[0].properties.id) {
+              setSelectLayer(e.features[0])
+              //dataGeo.features[index].properties.color = '#00f'
+              return true;
+            } else {
+              return false;
+            }
+        })
     }
 
     function renderFeatures(){
@@ -125,7 +136,12 @@ function FeatureState(){
                     id='Circle'
                     style={{
                         circleRadius: 6,
-                        circleColor: ['get', 'color']
+                        circleColor:  [
+                            'case',
+                            ['==', ['get', 'id'], selectedLayer.properties.id],
+                            '#00f',
+                            ['get', 'color']
+                        ], 
                     }}
                 />
                 <MapboxGL.SymbolLayer
