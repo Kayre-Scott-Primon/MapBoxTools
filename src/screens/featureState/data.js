@@ -210,11 +210,11 @@ export const dataBase = {
         },
         {
             "slug": "4af80fb0-e0a6-484c-b7ad-621a9a3db3b6",
-            "status": "finalizada",
+            "status": "recusada",
         },
         {
             "slug": "aa73805c-a943-40a9-9853-d0cbb8538f23",
-            "status": "pendente",
+            "status": "finalizada",
         },
         {
             "slug": "aefbbf44-40d2-4362-abbf-9cffc448f549",

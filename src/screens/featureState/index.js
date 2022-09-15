@@ -3,7 +3,6 @@ import styles from './style'
 import {
     View,
     Text,
-    TouchableOpacity,
     TouchableWithoutFeedback
 } from 'react-native'
 import MapboxGL from '@react-native-mapbox-gl/maps';
@@ -32,7 +31,6 @@ function FeatureState(){
                                 case 'finalizada':
                                     console.log('finalizou')
                                     counter = counter + 1
-                                    console.log('here', counter, e.properties.coletas.length )
                                     counter == e.properties.coletas.length 
                                         ? dataGeo.features[v].properties.color = '#0f0'
                                         : dataGeo.features[v].properties.color = '#ff0'
@@ -80,9 +78,9 @@ function FeatureState(){
         })
     }
 
-    async function addState(e, i){
+    async function addState(e){
         console.log(e)
-        dataGeo.features[i].properties.color = '#00f'
+        //dataGeo.features[i].properties.color = '#00f'
     }
 
     function renderFeatures(){
@@ -116,6 +114,35 @@ function FeatureState(){
         )))
     }
 
+    function renderFeaturesWithShape(){
+        return(
+            <MapboxGL.ShapeSource 
+                shape={dataGeo}
+                id='testShape'
+                onPress={(e) => addState(e)}
+                >
+                <MapboxGL.CircleLayer
+                    id='Circle'
+                    style={{
+                        circleRadius: 6,
+                        circleColor: ['get', 'color']
+                    }}
+                />
+                <MapboxGL.SymbolLayer
+                    id='Label'
+                    style={{
+                        textField: ['get', 'id'], 
+                        textColor: '#fff',
+                        textSize: 20,
+                        textAnchor: 'bottom-left',
+                        textOffset: [0.25, -0.25],
+                        textFont: ["DIN Offc Pro Regular", "Arial Unicode MS Regular"]
+                      }}
+                />
+            </MapboxGL.ShapeSource>
+        )
+    }
+
     return(
         <View style={styles.container}>
             <MapboxGL.MapView
@@ -133,7 +160,10 @@ function FeatureState(){
                     onUpdate={location => setUserLocation([location.coords.longitude, location.coords.latitude])}
                 />
 
-                {renderFeatures()}
+                {
+                    /*renderFeatures()*/
+                    renderFeaturesWithShape()
+                }
                 
             </MapboxGL.MapView>
 
