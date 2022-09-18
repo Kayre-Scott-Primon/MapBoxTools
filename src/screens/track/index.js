@@ -12,7 +12,7 @@ function Track(){
 
     MapboxGL.setAccessToken(tokenMapBox);
 
-    var [ map, setMap ] = useState()
+    let [map, setMap] = useState()
     const [ userLocation, setUserLocation ] = useState([0,0])
     const [ center, setCenter ] = useState([0,0])
     const [ lineFeature, setLineFeature ] = useState({})
@@ -73,7 +73,7 @@ function Track(){
     return(
         <View style={styles.container}>
             <MapboxGL.MapView
-                ref={r => {map = r, setMap(map)} }
+                ref={m => {map = m, setMap(map)}}
                 style={styles.map}
                 compassViewPosition={3}
                 styleURL={MapboxGL.StyleURL.TrafficNight}
