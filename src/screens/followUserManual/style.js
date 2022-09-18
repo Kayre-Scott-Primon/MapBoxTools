@@ -27,7 +27,7 @@ export default StyleSheet.create({
         flexDirection: 'row'
     },
     button: {
-        backgroundColor: 'rgba(255,150,3,0.5)',
+        backgroundColor: 'rgba(25,51,103,0.5)',
         paddingVertical: 8,
         paddingHorizontal: 15,
         borderRadius: 10,
